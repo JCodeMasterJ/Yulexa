@@ -18,7 +18,8 @@ pygame.mixer.init()
 
 ubicaciones_universidad = {
     "la cafetería": {
-         "la cafetería": "Con todo respeto hermano, usted es bobo o se hace? Ya esta en la cafetera",
+        "la cafetería": "¿Seguro que no tienes problemas visuales? Ya te encuentras en la cafetería.",
+        "la biblioteca": "Desde la cafetería, avanza hacia el Edificio A. Luego, sube las escaleras y, a mano derecha, encontrarás la biblioteca.",
          "la portería": "Desde la cafeteria, avanza hacia el edificio A. Baja las escaleras que están a mano derecha y llegarás a la porteria",
          "la enfermería": "Desde la cafeteria, avanza hacia las escaleras del edificio B y baja por ese pasillo, justo en medio encontrarás la enfermería a mano derecha.",
          "la clínica": "Desde la cafeteria, avanza hacia el edificio A. Baja las escaleras y encontrarás la clínica a mano derecha.",
@@ -85,7 +86,7 @@ def transformar_audio_en_texto():
     r = sr.Recognizer()  
 
     with sr.Microphone() as origen:
-        r.pause_threshold = 1  
+        r.pause_threshold = 2  
         print("Ya puedes hablar")
 
         while True:  
@@ -152,7 +153,6 @@ def solicitar_dia():
     dia_semana = dia.weekday()
     print(dia_semana)
     
-
     semana  = {0: "Lunes", 1:"Martes", 2:"Miercoles", 3:"Jueves", 4:"Viernes",
                5: "Sabado", 6: "Domingo"}
 
@@ -168,24 +168,24 @@ def obtener_clima(ciudad):
     respuesta = requests.get(url).json()
     if respuesta['cod'] == 200:
         temperatura = respuesta['main']['temp']
-        descripcion = respuesta['weather'][0]['description']
-        hablar(f"La temperatura en {ciudad} es de {temperatura} grados y el clima es {descripcion}")
+        print(f"La temperatura en {ciudad} es de {temperatura}°C")
+        hablar(f"La temperatura en {ciudad} es de {temperatura} grados")
     else:
         hablar("No pude obtener el clima")
 
 def saludo_alexa():
-    hora = datetime.datetime.now().hour
-    if hora < 6 or hora > 20:
+    hora = datetime.datetime.now()
+    if hora.hour <6 and hora.hour >=19:
         saludo = "Buenas noches"
-    elif hora < 13:
+    elif hora.hour >= 6 and hora.hour <12:
         saludo = "Buenos días"
     else:
         saludo = "Buenas tardes"
-    hablar(f'{saludo}, mi nombre es Alexa. Soy la asistente virtual de la Santoto. Di "Iniciar" para empezar esta emocionante aventura.')
+    hablar(f'{saludo}, mi nombre es Alexa. Soy la asistente virtual de la Santoto, di Iniciar para empezar esta emocionante aventura..')
     while pygame.mixer.music.get_busy():  # Esperar a que termine de hablar
         time.sleep(0.1)
     time.sleep(1)  # Dar un breve tiempo antes de mostrar el mensaje
-    print("Hola, ya puedes hablar")
+    print(" Ya puedes hablar")
     
 ####################################################################################################            
 # def preguntar_discapacidad_visual():
@@ -208,15 +208,15 @@ def preguntar_discapacidad_visual():
         respuesta = transformar_audio_en_texto().lower()
 
         if "sí" in respuesta:
-            hablar("Entendido. Activaré funciones accesibles para ti.")
+            hablar("Entendido. Activaré funciones accesibles para ti. Un momento por favor...")
             desplegar_menu_discapacitados()
             return True
         elif "no" in respuesta:
-            hablar("Gracias por tu respuesta. Continuemos.")
+            hablar("Gracias por tu respuesta. Un momento por favor.")
             desplegar_menu()
             return False
         else:
-            hablar("No entendí bien. Intenta de nuevo. Recuerda, di 1 para sí y 2 para no.")
+            hablar("No entendí bien. Intenta de nuevo.")
             
 #################################################################
 # def iniciar_alexa():
@@ -260,7 +260,7 @@ def decir_menu():
         Cuarto: Si quieres saber la hora, di "hora".
         Quinto: Si quieres buscar algo en internet, di "buscar sobre"... y luego el tema que deseas.
         Sexto: Si quieres reproducir una canción , di "reproducir" y luego el nombre de la canción.
-        Septimo: Si quieres escuchar un chiste, di "broma". 
+        Séptimo: Si quieres escuchar un chiste, di "broma". 
         Octavo: Si terminaste di, "adios"
            
            """)
@@ -305,6 +305,7 @@ def desplegar_menu():
             else:
                 hablar("No entendí bien, intenta de nuevo.")
             continue
+        
         elif "adiós" in solicitud:
             hablar("Nos vemos, cualquier cosa me chiflas")
             break
@@ -333,7 +334,8 @@ def desplegar_menu_discapacitados():
             continue
         elif "reproducir" in solicitud:
             hablar('Reproduciendo en YouTube')
-            pywhatkit.playonyt(solicitud.replace("reproducir", "").strip())
+            pywhatkit.playonyt(solicitud)
+            #pywhatkit.playonyt(solicitud.replace("reproducir", "").strip())
             continue
         elif "broma" in solicitud:
             hablar(pyjokes.get_joke('es'))

@@ -11,7 +11,7 @@ import time
 
 ubicaciones_universidad = {
     "la cafetería": {
-        "la cafetería": "texto",
+        "la cafetería": "¿Seguro que no tienes problemas visuales? Ya te encuentras en la cafetería.",
         "la biblioteca": "Desde la cafetería, avanza hacia el Edificio A. Luego, sube las escaleras y, a mano derecha, encontrarás la biblioteca.",
         "los cubículos udies": "Desde la cafetería, avanza hacia las escaleras del Edificio A. Luego, sube hasta el segundo piso y, a mano izquierda, encontrarás los cubículos UDIES.",
         "la decanatura": "Desde la cafetería, avanza hacia las escaleras del Edificio A. Luego, sube hasta el tercer piso y, a mano izquierda, encontrarás la Decanatura.",
@@ -25,7 +25,7 @@ ubicaciones_universidad = {
 
 ubicaciones_universidad_discapacitados = {
     "la cafetería": {
-        "la cafetería": "texto",
+        "la cafetería": "Ya te encuentras en la cafetería querido usuario.",
         "la porteria":"Desde la cafetería, avanza cuatro pasos hacia adelante, gira a la derecha y continúa dieciséis pasos. Luego, gira a la izquierda, avanza dos pasos y ¡cuidado! baja dos escalones pequeños. Sigue veinte pasos hacia adelante, baja otros dos escalones pequeños, avanza doce pasos más y prepárate para descender una escalera de diez escalones. Al finalizar, habrás llegado a la portería.",
         "la enfermeria": "Desde la cafetería, avanza cuatro pasos hacia adelante, gira a la derecha y continúa treinta pasos. Luego, gira a la izquierda y avanza seis pasos. ¡Cuidado! Baja siete escalones, avanza cinco pasos y desciende otros seis escalones. Continúa cinco pasos más y, a tu derecha, encontrarás la enfermería.",
         "la clinica": "Desde la cafetería, avanza cuatro pasos hacia adelante, gira a la derecha y continúa treinta pasos. Luego, gira a la izquierda y avanza seis pasos. ¡Cuidado! Baja siete escalones, avanza cinco pasos y desciende otros seis escalones. Continúa veintisiete pasos hacia adelante y encontrarás la clínica de odontología.",
