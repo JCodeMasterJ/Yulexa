@@ -58,13 +58,16 @@ def transformar_audio_en_texto():
 def obtener_ruta(origen, destino):
     origen = origen.lower().strip()
     destino = destino.lower().strip()
+
+    print(f"Origen: {origen}, Destino: {destino}")
+
     if origen in ubicaciones_universidad:
         if destino in ubicaciones_universidad[origen]:
             ruta = ubicaciones_universidad[origen][destino]
             print(ruta)
             hablar(ruta)
         else:
-            mensaje = f"No tengo informaciÃ³n sobre cÃ³mo ir de {origen} a {destino}. Prueba con otro destino."
+            mensaje = f"No tengo información sobre cómo ir de {origen} a {destino}. Prueba con otro destino."
             print(mensaje)
             hablar(mensaje)
     else:
