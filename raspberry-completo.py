@@ -283,9 +283,12 @@ def desplegar_menu():
             solicitar_hora()
             continue
         elif "buscar" in solicitud:
-            hablar('Buscando en Internet')
-            solicitud = solicitud.replace('buscar sobre', '').strip()
-            pywhatkit.search(solicitud)
+            hablar('Buscando en wikipedia')
+            solicitud = solicitud.replace('buscar sobre', '')
+            wikipedia.set_lang('es')
+            resultado = wikipedia.summary(solicitud, sentences = 2)
+            hablar(f'Mira lo que encontre:')
+            hablar( resultado)
             continue
         elif "reproducir" in solicitud:
             hablar('Reproduciendo en YouTube')
